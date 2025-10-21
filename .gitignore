@@ -8,3 +8,7 @@ build/
 .vite/
 coverage/
 *.log
+
+.DS_Store
+node_modules/
+dist/
