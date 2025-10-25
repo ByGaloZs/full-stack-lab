@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import './ConferenceEvent.css';
 import TotalCost from './TotalCost';
+import { toggleMealSelection } from './mealsSlice';
+import { incrementAvQuantity, decrementAvQuantity } from './avSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementQuantity, decrementQuantity } from './venueSlice';
-import { incrementAvQuantity, decrementAvQuantity } from './avSlice';
-import { toggleMealSelection } from './mealsSlice';
-
 const ConferenceEvent = () => {
   const [showItems, setShowItems] = useState(false);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
@@ -107,7 +106,6 @@ const ConferenceEvent = () => {
       </>
     );
   };
-
   const calculateTotalCost = (section) => {
     let totalCost = 0;
     if (section === 'venue') {
@@ -130,7 +128,6 @@ const ConferenceEvent = () => {
   const venueTotalCost = calculateTotalCost('venue');
   const avTotalCost = calculateTotalCost('av');
   const mealsTotalCost = calculateTotalCost('meals');
-
   const navigateToProducts = (idType) => {
     if (idType == '#venue' || idType == '#addons' || idType == '#meals') {
       if (showItems) {
@@ -139,7 +136,6 @@ const ConferenceEvent = () => {
       }
     }
   };
-
   const totalCosts = {
     venue: venueTotalCost,
     av: avTotalCost,
@@ -250,7 +246,7 @@ const ConferenceEvent = () => {
                   </div>
                 ))}
               </div>
-              <div className="total_cost">Total Cost: ${avTotalCost}</div>
+              <div className="total_cost">Total Cost: {avTotalCost}</div>
             </div>
 
             {/* Meal Section */}
@@ -261,17 +257,19 @@ const ConferenceEvent = () => {
               </div>
 
               <div className="input-container venue_selection">
-                <label htmlFor="numberOfPeople">
-                  <h3>Number of People:</h3>
-                </label>
-                <input
-                  type="number"
-                  className="input_box5"
-                  id="numberOfPeople"
-                  value={numberOfPeople}
-                  onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
-                  min="1"
-                ></input>
+                <div className="input-container venue_selection">
+                  <label htmlFor="numberOfPeople">
+                    <h3>Number of People:</h3>
+                  </label>
+                  <input
+                    type="number"
+                    className="input_box5"
+                    id="numberOfPeople"
+                    value={numberOfPeople}
+                    onChange={(e) => setNumberOfPeople(parseInt(e.target.value))}
+                    min="1"
+                  />
+                </div>
               </div>
               <div className="meal_selection">
                 {mealsItems.map((item, index) => (
@@ -289,7 +287,7 @@ const ConferenceEvent = () => {
           </div>
         ) : (
           <div className="total_amount_detail">
-            <TotalCost totalCosts={totalCosts} handleClick={handleToggleItems} ItemsDisplay={() => <ItemsDisplay items={items} />} />
+            <TotalCost totalCosts={totalCosts} ItemsDisplay={() => <ItemsDisplay items={items} />} />
           </div>
         )}
       </div>
