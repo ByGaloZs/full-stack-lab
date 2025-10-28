@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+*.log
+
+.DS_Store
+node_modules/
+dist/
