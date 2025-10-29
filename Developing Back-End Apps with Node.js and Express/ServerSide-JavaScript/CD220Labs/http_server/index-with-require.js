@@ -8,6 +8,8 @@ const today = require('./today');
 const requestListener = function (req, res) {
   res.writeHead(200); // Set the status code to 200 (OK)
   let dateVal = today.getDate(); // Get the current date from the 'today' module
+  let monthVal = dateVal.getMonth();
+  let yearVal = dateVal.getYear();
 
   // Determine the appropriate greeting based on the current time
   let greeting = 'It is still not morning';
@@ -22,7 +24,7 @@ const requestListener = function (req, res) {
   }
 
   // Send the response with the appropriate greeting
-  res.end(`Hello, ${greeting}`);
+  res.end(`Hello, ${greeting} Today is ${dateVal}`);
 };
 
 // Define the port number
