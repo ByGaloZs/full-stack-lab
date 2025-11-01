@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './TotalCost.css';
 const TotalCost = ({ totalCosts, ItemsDisplay }) => {
   const total_amount = totalCosts.venue + totalCosts.av + totalCosts.meals;
@@ -22,4 +23,14 @@ const TotalCost = ({ totalCosts, ItemsDisplay }) => {
     </div>
   );
 };
+
+TotalCost.propTypes = {
+  totalCosts: PropTypes.shape({
+    venue: PropTypes.number.isRequired,
+    av: PropTypes.number.isRequired,
+    meals: PropTypes.number.isRequired,
+  }).isRequired,
+  ItemsDisplay: PropTypes.elementType.isRequired,
+};
+
 export default TotalCost;
