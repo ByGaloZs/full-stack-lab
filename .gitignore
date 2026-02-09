@@ -9,4 +9,5 @@ build/
 coverage/
 *.log
 .venv/
+__pycache__/
 
